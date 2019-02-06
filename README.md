@@ -1,6 +1,6 @@
 ## Measuring Patient Similarities via a Deep Architecture with Medical Concept Embedding; Official TensorFlow Implementation
 ![Python 2.7](https://img.shields.io/badge/python-2.7-green.svg?style=plastic)
-![TensorFlow 0.12.0](https://img.shields.io/badge/tensorflow-1.10-green.svg?style=plastic)
+![TensorFlow 0.12.0](https://img.shields.io/badge/tensorflow-0.12.0-green.svg?style=plastic)
 
 
 This repository contains the official TensorFlow implementation of the following paper:
