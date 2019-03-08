@@ -22,3 +22,15 @@ You can train the networks as follows:
 4. python train.py
 5. python test.py
 
+## files
+
+### model_50.vector
+Embedding file: The medical events appeared in [sentence_sorted_by_date.csv](data/sentence_sorted_by_date.csv) and their embeddings.
+
+
+### sentence_sorted_by_date.csv
+-	Each line of the file contains:
+	1.	cohort name
+	2.	patient id
+	3.	medical event sequences
+-	For each patient, by concatenating all medical events in his/her EHRs according to their happening timestamps (for events with the same timestamp we do not care about the order), we obtained a sequences.
