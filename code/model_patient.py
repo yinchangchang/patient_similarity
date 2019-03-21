@@ -5,8 +5,6 @@ import tensorflow as tf
 
 num_of_words = 250
 dimension_of_word_embeddings = 50
-# num_of_words = 28
-# dimension_of_word_embeddings = 28
 num_of_filters = 100
 X1 = tf.placeholder("float", [None, num_of_words, dimension_of_word_embeddings])
 X2 = tf.placeholder("float", [None, num_of_words, dimension_of_word_embeddings])
@@ -31,28 +29,22 @@ def model():
     conv1 = get_feature(X1)
     conv2 = get_feature(X2)
 
+    # calculate pairwise similarity with similarity_matrix
     similarity_matrix = init_weights([num_of_filters, num_of_filters])
-    # similarity_matrix = similarity_matrix + tf.transpose(similarity_matrix)
-
-
-    conv1 = tf.matmul(conv1, similarity_matrix)
-    similarity = tf.reduce_sum(conv1 * conv2, axis=1)
+    mat = tf.matmul(conv1, similarity_matrix)
+    similarity = tf.reduce_sum(mat * conv2, axis=1)
     similarity = tf.reshape(similarity, [-1, 1])
 
-    # print similarity.get_shape()
+    # concat features and similarity
     pairwise_feature = tf.concat(1,[conv1,conv2,similarity])
     pairwise_feature = tf.nn.dropout(pairwise_feature, p_keep_hidden)
-    # print pairwise_feature.get_shape()
 
+    # compute the deep similarity (y) between X1 and X2
     w = init_weights([num_of_filters * 2 +1,1])
     y = tf.matmul(pairwise_feature,w)
     y = tf.reshape(y, [-1])
 
     cost = tf.reduce_mean((Y - y) ** 2)
-    # print y.get_shape()
-    # print cost.get_shape()
+
+    # return deep similarity and cost
     return y, cost
-
-
-# model()
-
